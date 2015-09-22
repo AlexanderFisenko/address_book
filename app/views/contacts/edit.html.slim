@@ -1,1 +1,6 @@
-'edit
+= title t('.edit_contact')
+
+section#edit-contact
+  h1 =t('.edit_contact')
+  = render partial: 'form', locals: {contact: @contact }
+

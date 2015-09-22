@@ -21,11 +21,50 @@
 
 en:
   contacts:
-    contacts: 'Contacts'
-
+    index:
+      jump_to: Jump to
+      contacts: Contacts
+      new_contact: New contact
+      export: Export
+      import_product: Import Products
+      import: Import
+      contacts: Contacts
+      are_you_sure: Are you sure?
+    edit:
+      edit_contact: Edit contact
     create:
       success: Contact was successfully created
+    show:
+      contact: Contact
+      phones: 'Phones:'
+      emails: 'Emails:'
+      share: Share
+      enter_email: Enter email
+      send: Send
+      back: Back
     update:
       success: Contact was successfully updated
     destroy:
       success: Contact was successfully destroyed
+    share:
+      success: Contact was successfully shared
+      failure: Contact wasn't shared
+    import:
+      success: Contacts were successfully imported
+    form:
+      update: Update
+      back: Back
+      new: New
+      create: Create
+      add_phone_input: Add phone input
+      add_email_input: Add email input
+  mailer:
+    share:
+      contacts_of: Contacts of
+  activerecord:
+    attributes:
+      contact:
+        first_name: First name
+        last_name: Last name
+        phones: 'Phones'
+        emails: 'Emails'

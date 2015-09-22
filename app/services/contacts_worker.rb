@@ -35,8 +35,8 @@ class ContactsWorker
       sheet1.each 1 do |row|
         first_name = row[0]
         last_name  = row[1]
-        phones     = row[2].split(", ")
-        emails     = row[3].split(", ")
+        phones     = row[2].split(", ").flatten
+        emails     = row[3].split(", ").flatten
 
         next if (first_name.blank? && last_name.blank?) || (phones.blank? && emails.blank?)
 

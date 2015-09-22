@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :destroy, :update]
+  before_action :set_contact, only: [:show, :edit, :destroy, :update, :share]
 
   def export
     contacts = Contact.all.order(full_name: :asc)
@@ -13,32 +13,34 @@ class ContactsController < ApplicationController
     redirect_to contacts_path, notice: t('.success')
   end
 
+  def share
+    mail = params[:mail]
+    if mail.present? || @contact.present?
+      Mailer.share(@contact, mail).deliver_now
+      redirect_to contacts_path, notice: t('.success')
+    else
+      return redirect_to contacts_path, alert: t('.failure')
+    end
+  end
+
   def index
     @contacts_groupped_by_first_letter = Contact.groupped_by_first_letter
-    # @contacts = Contact.all.order(full_name: :asc)
-
-    # respond_to do |format|
-    #   format.html
-    #   format.xls
-    # end
   end
 
   def show
   end
 
   def new
-    @contact = Contact.new
-    @contact.phones = [nil, nil, nil]
+    @contact = Contact.new(phones: [nil], emails: [nil])
   end
 
   def edit
   end
 
   def create
-    binding.pry
     @contact = Contact.create(contact_params)
     if @contact.valid?
-      redirect_to contacts_path, notice: t('.success')
+      redirect_to contact_path(@contact), notice: t('.success')
     else
       render :new
     end
@@ -47,7 +49,7 @@ class ContactsController < ApplicationController
   def update
     @contact.update(contact_params)
     if @contact.valid?
-      redirect_to contacts_path, notice: t('.success')
+      redirect_to contact_path(@contact), notice: t('.success')
     else
       render :new
     end

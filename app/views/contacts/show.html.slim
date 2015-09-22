@@ -1,21 +1,27 @@
 = title("Contact #{@contact.full_name}")
 
 section#show-contact
-  h1 Contact "#{@contact.full_name}"
+  h1= contact_title(@contact)
 
   - if @contact.phones.present?
     .phones
-      h4 Phones:
+      h4= t('.phones')
       ul.phones
         - @contact.phones.each do |phone|
           li = phone
 
   - if @contact.emails.present?
     .emails
-      h4 Emails:
+      h4= t('.emails')
       ul.phones
         - @contact.emails.each do |email|
           li = email
 
+  .share
+    h4= t('.share')
+    = form_tag share_contact_path(@contact) do
+      = text_field_tag :mail, nil, placeholder: t('.enter_email')
+      = submit_tag t('.send')
+
   .actions
-    = link_to 'Back', contacts_path
+    = link_to t('.back'), contacts_path

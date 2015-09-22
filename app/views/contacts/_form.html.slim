@@ -1,46 +1,35 @@
-div
-  = label :contact, :first_name
-  = text_field :contact, :first_name
+= form_for @contact do |f|
 
-div
-  = label :contact, :last_name
-  = text_field :contact, :last_name
+  .first-name
+    = f.label :first_name
+    = f.text_field :first_name
+    = show_errors(contact, :first_name)
 
-- contact.phones.each do |phone|
-  = fields_for 'phones[]', phone do |phone_fields|
-    = phone_fields.text_field nil
-    = phone_fields.text_field nil
-    = phone_fields.text_field nil
+  .last-name
+    = f.label :last_name
+    = f.text_field :last_name
+    = show_errors(contact, :last_name)
 
-/ div
-/   = label_tag :contact, :Phone1
-/   = text_field_tag "contact[phones][]", nil
-/ div
-/   = label_tag :contact, :Phone2
-/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
-/ div
-/   = label_tag :contact, :Phone3
-/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
-/ div
-/   = label_tag :contact, :Phone4
-/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
-/ div
-/   = label_tag :contact, :Phone5
-/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
+  .phones-fields
+    p = f.label :phones
+    = link_to t('.add_phone_input'), "#", id: 'add-phone'
+    - contact.phones.each do |phone|
+      div
+        input type="tel" name="contact[phones][]" id="contact_phones_" pattern="^\+?\d+$" value="#{phone}"
 
-div
-  = label_tag :contact, :Email1
-  = text_field_tag "contact[emails][]", nil
-div
-  = label_tag :contact, :Email2
-  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
-div
-  = label_tag :contact, :Email3
-  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
-div
-  = label_tag :contact, :Email4
-  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
-div
-  = label_tag :contact, :Email5
-  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
+  .emails-fields
+    p = f.label :emails
+    = link_to t('.add_email_input'), "#", id: 'add-email'
+    - contact.emails.each do |email|
+      div = email_field_tag "contact[emails][]", email
+
+  = show_errors(contact, :base)
+
+  .actions
+    - if contact.new_record?
+      = submit_tag t('.create'), class: 'link'
+    - else
+      = submit_tag t('.update'), class: 'link'
+    = link_to t('.back'), contacts_path
+
 

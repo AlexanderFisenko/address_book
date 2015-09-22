@@ -1,6 +1,6 @@
 500.times do
   phones = []
-  rand(1..4).times { phones << Faker::PhoneNumber.cell_phone }
+  rand(1..4).times { phones << ("+" + SecureRandom.random_number(999999999).to_s)}
 
   emails = []
   rand(1..4).times { emails << Faker::Internet.email }

@@ -1,7 +1,7 @@
 class Contact < ActiveRecord::Base
-
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :first_name, {scope: :last_name}
+  validates_uniqueness_of :last_name,  {scope: :first_name} # To generate an error for last_name as well
   validate :has_phone_or_email?
 
   before_save :set_full_name
@@ -36,16 +36,4 @@ class Contact < ActiveRecord::Base
     def has_phone_or_email?
       errors.add(:base, 'must have at least one phone or email') if phones.blank? &&   emails.blank?
     end
-
-    # def phones_format
-    #   if phones.collect { |phone| phone.match(/\D/).present? }.any?
-    #     errors.add(:phones, 'invalid phone number format')
-    #   end
-    # end
-
-    # def emales_format
-    #   # if emails.collect { |email| phone.match(/\D/).present? }.any?
-    #   #   errors.add(:emales, 'invalid email format')
-    #   # end
-    # end
 end

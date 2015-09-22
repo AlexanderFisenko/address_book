@@ -1,0 +1,16 @@
+h1
+  = "#{t('.contacts_of')} #{@contact.full_name}"
+
+- if @contact.phones.present?
+  .phones
+    h4= t('contacts.show.phones')
+    ul.phones
+      - @contact.phones.each do |phone|
+        li = phone
+
+- if @contact.emails.present?
+  .emails
+    h4= t('contacts.show.emails')
+    ul.phones
+      - @contact.emails.each do |email|
+        li = email

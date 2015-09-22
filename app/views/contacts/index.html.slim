@@ -1,22 +1,22 @@
-= title(t('contacts.contacts'))
+= title t('.contacts')
 
 section#contacts
   = link_to "#", class: "scrollToTop" do
     = fa_icon "angle-up"
 
   header.standard-body-header
-    h1= t('contacts.contacts')
+    h1= t('.contacts')
   section.table-of-contents
     span= t '.jump_to'
     - @contacts_groupped_by_first_letter.each do |letter, contacts|
       = link_to letter, contacts_path(anchor: letter)
   .new-contact
-    = link_to 'New contact', new_contact_path, class: 'btn'
-    = link_to 'Export', export_contacts_path, class: 'btn'
-    h4 Import Products
+    = link_to t('.new_contact'), new_contact_path, class: 'btn'
+    = link_to t('.export'), export_contacts_path, class: 'btn'
+    h4 = t('.import_products')
     = form_tag import_contacts_path, multipart: true do
       = file_field_tag :file
-      = submit_tag "Import"
+      = submit_tag t('.import')
 
   section.contacts
     - @contacts_groupped_by_first_letter.each do |letter, contacts|
@@ -28,4 +28,4 @@ section#contacts
               tr
                 td = link_to contact.full_name, contact_path(contact)
                 td = link_to fa_icon("pencil-square-o"), edit_contact_path(contact)
-                td.destroy = link_to fa_icon("times"), contact_path(contact), method: :delete, data: {confirm: "Are you sure?"}
+                td.destroy = link_to fa_icon("times"), contact_path(contact), method: :delete, data: {confirm: t('.are_you_sure')}

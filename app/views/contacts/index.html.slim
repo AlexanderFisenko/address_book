@@ -1,0 +1,31 @@
+= title(t('contacts.contacts'))
+
+section#contacts
+  = link_to "#", class: "scrollToTop" do
+    = fa_icon "angle-up"
+
+  header.standard-body-header
+    h1= t('contacts.contacts')
+  section.table-of-contents
+    span= t '.jump_to'
+    - @contacts_groupped_by_first_letter.each do |letter, contacts|
+      = link_to letter, contacts_path(anchor: letter)
+  .new-contact
+    = link_to 'New contact', new_contact_path, class: 'btn'
+    = link_to 'Export', export_contacts_path, class: 'btn'
+    h4 Import Products
+    = form_tag import_contacts_path, multipart: true do
+      = file_field_tag :file
+      = submit_tag "Import"
+
+  section.contacts
+    - @contacts_groupped_by_first_letter.each do |letter, contacts|
+      article.contact id="#{letter}"
+        h1.letter-name = letter
+        table.contacts-table
+          tbody
+            - contacts.each do |contact|
+              tr
+                td = link_to contact.full_name, contact_path(contact)
+                td = link_to fa_icon("pencil-square-o"), edit_contact_path(contact)
+                td.destroy = link_to fa_icon("times"), contact_path(contact), method: :delete, data: {confirm: "Are you sure?"}

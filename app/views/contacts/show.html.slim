@@ -1,0 +1,21 @@
+= title("Contact #{@contact.full_name}")
+
+section#show-contact
+  h1 Contact "#{@contact.full_name}"
+
+  - if @contact.phones.present?
+    .phones
+      h4 Phones:
+      ul.phones
+        - @contact.phones.each do |phone|
+          li = phone
+
+  - if @contact.emails.present?
+    .emails
+      h4 Emails:
+      ul.phones
+        - @contact.emails.each do |email|
+          li = email
+
+  .actions
+    = link_to 'Back', contacts_path

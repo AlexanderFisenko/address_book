@@ -1,0 +1,9 @@
+= title('New contact')
+
+section#new-contact
+  h1 New contact
+  = form_tag contacts_path do
+    = render partial: 'form', locals: {contact: @contact}
+    .actions
+      = submit_tag 'Create'
+      = link_to 'Back', contacts_path

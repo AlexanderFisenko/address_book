@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  contacts:
+    contacts: 'Contacts'
+
+    create:
+      success: Contact was successfully created
+    update:
+      success: Contact was successfully updated
+    destroy:
+      success: Contact was successfully destroyed

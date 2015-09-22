@@ -1,0 +1,46 @@
+div
+  = label :contact, :first_name
+  = text_field :contact, :first_name
+
+div
+  = label :contact, :last_name
+  = text_field :contact, :last_name
+
+- contact.phones.each do |phone|
+  = fields_for 'phones[]', phone do |phone_fields|
+    = phone_fields.text_field nil
+    = phone_fields.text_field nil
+    = phone_fields.text_field nil
+
+/ div
+/   = label_tag :contact, :Phone1
+/   = text_field_tag "contact[phones][]", nil
+/ div
+/   = label_tag :contact, :Phone2
+/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
+/ div
+/   = label_tag :contact, :Phone3
+/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
+/ div
+/   = label_tag :contact, :Phone4
+/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
+/ div
+/   = label_tag :contact, :Phone5
+/   = text_field_tag "contact[phones][]", nil, placeholder: "optional"
+
+div
+  = label_tag :contact, :Email1
+  = text_field_tag "contact[emails][]", nil
+div
+  = label_tag :contact, :Email2
+  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
+div
+  = label_tag :contact, :Email3
+  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
+div
+  = label_tag :contact, :Email4
+  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
+div
+  = label_tag :contact, :Email5
+  = text_field_tag "contact[emails][]", nil, placeholder: "optional"
+
